@@ -1,12 +1,66 @@
-* {
-  box-sizing: border-box;
+:root {
+  /* base tokens */
+  --font-family: Arial, sans-serif;
+  --page-padding: 20px;
+  --radius: 10px;
+  --gap: 12px;
+  --control-padding: 16px;
+  --control-input-padding: 8px;
+  --control-font-size: 14px;
+  --transition-fast: 0.15s ease;
+  --transition-medium: 0.2s ease;
+
+  /* light theme colors */
+  --bg: #f5f5f5;
+  --text: #111;
+  --surface: #fff;
+  --muted-border: #ddd;
+  --control-border: #ccc;
+  --thead-bg: #eee;
+  --cell-border: #999;
+  --hover-bg: #f0f0f0;
+
+  /* legend/badge defaults (used as fallbacks) */
+  --badge-root: gold;
+  --badge-scale: #7ec8ff;
+  --badge-triad: #9eff9e;
+  --badge-seventh: #ffb6c1;
+  --badge-interval: #ffde91;
+  --badge-previous: #ffb0b0;
+  --badge-next: #a8ffb0;
+
+  /* colors used in dark mode for text on badges */
+  --badge-dark-text: #333;
+  --badge-dark-hover-text: #ccc;
 }
 
+/* dark theme overrides */
+body.dark {
+  --bg: #000;
+  --text: #f3f4f6;
+  --surface: #333;
+  --muted-border: #374151;
+  --control-border: #4b5563;
+  --thead-bg: #555;
+  --cell-border: #4b5563;
+  --hover-bg: #555;
+
+  /* badges keep same background, but text on them should be darker for contrast */
+  --badge-dark-text: #333;
+  --badge-dark-hover-text: #ccc;
+}
+
+ {
+  box-sizing: border-box;
+}
 body {
-  font-family: Arial, sans-serif;
+  font-family: var(--font-family);
   margin: 0;
-  padding: 20px;
-  background: #f5f5f5;
+  padding: var(--page-padding);
+  background: var(--bg);
+  color: var(--text);
+  transition: background var(--transition-medium),
+    color var(--transition-medium);
 }
 
 h1 {
@@ -16,12 +70,14 @@ h1 {
 .controls {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
+  gap: var(--gap);
   margin-bottom: 20px;
-  background: white;
-  padding: 16px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  background: var(--surface);
+  padding: var(--control-padding);
+  border-radius: var(--radius);
+  border: 1px solid var(--muted-border);
+  transition: background var(--transition-medium),
+    border-color var(--transition-medium);
 }
 
 .control-group {
@@ -31,22 +87,28 @@ h1 {
 }
 
 label {
-  font-size: 14px;
+  font-size: var(--control-font-size);
   font-weight: bold;
 }
 
 select,
 button {
-  padding: 8px;
-  font-size: 14px;
+  padding: var(--control-input-padding);
+  font-size: var(--control-font-size);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--control-border);
+  border-radius: 6px;
 }
 
 .table-wrapper {
   overflow-x: auto;
-  background: white;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--muted-border);
   padding: 12px;
+  transition: background var(--transition-medium),
+    border-color var(--transition-medium);
 }
 
 table {
@@ -57,7 +119,7 @@ table {
 
 th,
 td {
-  border: 1px solid #999;
+  border: 1px solid var(--cell-border);
   width: 48px;
   height: 48px;
   text-align: center;
@@ -68,54 +130,86 @@ td {
 
 td {
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background var(--transition-fast);
 }
 
 thead th {
-  background: #eee;
+  background: var(--thead-bg);
   position: sticky;
   top: 0;
   z-index: 2;
 }
 
 tbody th {
-  background: #eee;
+  background: var(--thead-bg);
   position: sticky;
   left: 0;
   z-index: 1;
 }
 
 td:hover {
-  background: #f0f0f0;
+  background: var(--hover-bg);
 }
 
+/* badge / cell color utilities */
 .root {
-  background: gold;
+  background: var(--badge-root);
   font-weight: bold;
 }
-
 .scale {
-  background: #7ec8ff;
+  background: var(--badge-scale);
 }
-
 .triad {
-  background: #9eff9e;
+  background: var(--badge-triad);
 }
-
 .seventh {
-  background: #ffb6c1;
+  background: var(--badge-seventh);
 }
-
 .interval {
-  background: #ffde91;
+  background: var(--badge-interval);
 }
-
 .previous {
-  background: #ffb0b0;
+  background: var(--badge-previous);
+}
+.next {
+  background: var(--badge-next);
 }
 
-.next {
-  background: #a8ffb0;
+/* dark-mode badge text color + hover */
+body.dark td.root,
+body.dark td.scale,
+body.dark td.triad,
+body.dark td.seventh,
+body.dark td.interval,
+body.dark td.previous,
+body.dark td.next {
+  color: var(--badge-dark-text);
+}
+
+body.dark td.root:hover,
+body.dark td.scale:hover,
+body.dark td.triad:hover,
+body.dark td.seventh:hover,
+body.dark td.interval:hover,
+body.dark td.previous:hover,
+body.dark td.next:hover {
+  color: var(--badge-dark-hover-text);
+}
+
+/* header/footer color adjustments in dark mode (driven by variables) */
+body.dark thead th,
+body.dark tbody th {
+  background: var(--thead-bg);
+  color: var(--text);
+}
+
+body.dark td {
+  color: var(--text);
+  border-color: var(--cell-border);
+}
+
+body.dark th {
+  border-color: var(--cell-border);
 }
 
 .marker::after {
@@ -130,7 +224,7 @@ td:hover {
 .legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--gap);
   margin-top: 16px;
   font-size: 14px;
 }
@@ -144,9 +238,10 @@ td:hover {
 .legend-color {
   width: 18px;
   height: 18px;
-  border: 1px solid #999;
+  border: 1px solid var(--cell-border);
 }
 
+/* responsive tweak */
 @media (max-width: 700px) {
   th,
   td {

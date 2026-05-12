@@ -4,12 +4,14 @@ const TUNINGS = {
   // 4 string bass
   "bass-standard": ["G", "D", "A", "E"],
   "bass-drop-d": ["G", "D", "A", "D"],
+  "bass-d-standard": ["F", "C", "G", "D"],
 
   // 5 string bass
   "bass-5-standard": ["G", "D", "A", "E", "B"],
   "bass-5-tenor": ["C", "G", "D", "A", "E"],
   "bass-5-drop-a": ["G", "D", "A", "E", "A"],
-  
+  "bass-5-a-standard": ["F", "C", "G", "D", "A"],
+
   // 6 string guitar
   standard: ["e", "B", "G", "D", "A", "E"],
   "drop-d": ["e", "B", "G", "D", "A", "D"],

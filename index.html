@@ -11,6 +11,7 @@
     <h1>Interactive Guitar Fretboard Trainer</h1>
     
     <div class="controls">
+    
       <div class="control-group">
         <label>Mode</label>
         <select id="mode">
@@ -31,6 +32,20 @@
     
           <option value="bass-standard">4 String Bass - Standard (E)</option>
           <option value="bass-drop-d">4 String Bass - Drop D</option>
+    
+          <option disabled>──────────</option>
+    
+          <option value="bass-5-standard">
+            5 String Bass - Standard (B)
+          </option>
+    
+          <option value="bass-5-tenor">
+            5 String Bass - Tenor
+          </option>
+    
+          <option value="bass-5-drop-a">
+            5 String Bass - Drop A
+          </option>
     
           <option disabled>──────────</option>
     
@@ -72,6 +87,11 @@
       <div class="control-group">
         <label>Audio</label>
         <button id="toggle-audio">Audio: OFF</button>
+      </div>
+    
+      <div class="control-group">
+        <label>Theme</label>
+        <button id="toggle-theme">Dark Mode</button>
       </div>
     
     </div>

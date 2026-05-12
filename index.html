@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Guitar Fretboard Trainer</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+
+    <h1>Interactive Guitar Fretboard Trainer</h1>
+    
+    <div class="controls">
+      <div class="control-group">
+        <label>Mode</label>
+        <select id="mode">
+          <option value="notes">Matching Notes</option>
+          <option value="fifths">Circle of Fifths</option>
+          <option value="major-scale">Major Scale</option>
+          <option value="minor-pentatonic">Minor Pentatonic</option>
+          <option value="major-triad">Major Triad</option>
+          <option value="minor-triad">Minor Triad</option>
+          <option value="dominant-7">Dominant 7</option>
+          <option value="intervals">Intervals</option>
+        </select>
+      </div>
+    
+      <div class="control-group">
+        <label>Tuning Preset</label>
+        <select id="tuning">
+    
+          <option value="bass-standard">4 String Bass - Standard (E)</option>
+          <option value="bass-drop-d">4 String Bass - Drop D</option>
+    
+          <option disabled>──────────</option>
+    
+          <option value="standard" selected>6 String Guitar - Standard (E)</option>
+          <option value="drop-d">6 String Guitar - Drop D</option>
+          <option value="d-standard">6 String Guitar - D Standard</option>
+    
+          <option disabled>──────────</option>
+    
+          <option value="7-standard">7 String Guitar - Standard (B)</option>
+          <option value="7-drop-a">7 String Guitar - Drop A</option>
+          <option value="7-a-standard">7 String Guitar - A Standard</option>
+          <option value="7-drop-g">7 String Guitar - Drop G</option>
+    
+        </select>
+      </div>
+    
+      <div class="control-group">
+        <label>Orientation</label>
+        <select id="orientation">
+          <option value="right" selected>Right Handed</option>
+          <option value="left">Left Handed</option>
+        </select>
+      </div>
+    
+      <div class="control-group">
+        <label>Interval</label>
+        <select id="interval-select">
+          <option value="1">Root</option>
+          <option value="2">Major 2nd</option>
+          <option value="3">Major 3rd</option>
+          <option value="4">Perfect 4th</option>
+          <option value="5" selected>Perfect 5th</option>
+          <option value="7">Minor 7th</option>
+          <option value="12">Octave</option>
+        </select>
+      </div>
+    
+      <div class="control-group">
+        <label>Audio</label>
+        <button id="toggle-audio">Audio: OFF</button>
+      </div>
+    
+    </div>
+    
+    <div class="table-wrapper">
+      <div id="table-container"></div>
+    </div>
+    
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-color root"></div>
+        Root
+      </div>
+    
+      <div class="legend-item">
+        <div class="legend-color scale"></div>
+        Scale Tone
+      </div>
+    
+      <div class="legend-item">
+        <div class="legend-color triad"></div>
+        Triad Tone
+      </div>
+    
+      <div class="legend-item">
+        <div class="legend-color seventh"></div>
+        7th Tone
+      </div>
+    
+      <div class="legend-item">
+        <div class="legend-color interval"></div>
+        Interval
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

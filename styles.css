@@ -153,9 +153,10 @@ h1 {
   transform: rotate(180deg);
 }
 
+/* Control grid: even rows — 1 col → 2 → 3 → 6 as width allows */
 .controls {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--gap);
   margin-bottom: 0;
   background: var(--surface);
@@ -164,6 +165,24 @@ h1 {
   border: 1px solid var(--muted-border);
   transition: background var(--transition-medium),
     border-color var(--transition-medium);
+}
+
+@media (min-width: 440px) {
+  .controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 700px) {
+  .controls {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .controls {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
 }
 
 .control-group {

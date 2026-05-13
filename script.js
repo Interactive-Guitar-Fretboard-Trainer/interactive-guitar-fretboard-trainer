@@ -57,10 +57,45 @@ const orientationSelect = document.getElementById("orientation");
 const intervalSelect = document.getElementById("interval-select");
 const audioButton = document.getElementById("toggle-audio");
 const themeButton = document.getElementById("toggle-theme");
+const controlsDrawer = document.getElementById("controls-drawer");
+const controlsSummaryLine = document.getElementById("controls-summary-line");
+
+function closeControlsDrawerIfNarrow() {
+  if (!controlsDrawer || !window.matchMedia("(max-width: 700px)").matches) {
+    return;
+  }
+  controlsDrawer.checked = false;
+}
+
+function selectedOptionLabel(select) {
+  const t = select.selectedOptions[0]?.textContent ?? "";
+  return t.replace(/\s+/g, " ").trim();
+}
+
+function updateControlsSummaryLine() {
+  if (!controlsSummaryLine) return;
+
+  const parts = [
+    selectedOptionLabel(modeSelect),
+    selectedOptionLabel(tuningSelect),
+    selectedOptionLabel(orientationSelect)
+  ];
+
+  if (modeSelect.value === "intervals") {
+    parts.push(selectedOptionLabel(intervalSelect));
+  }
+
+  const isDark = document.body.classList.contains("dark");
+  parts.push(`Audio ${audioEnabled ? "on" : "off"}`);
+  parts.push(isDark ? "Dark" : "Light");
+
+  controlsSummaryLine.textContent = parts.join(" · ");
+}
 
 audioButton.addEventListener("click", () => {
   audioEnabled = !audioEnabled;
   audioButton.textContent = `Audio: ${audioEnabled ? "ON" : "OFF"}`;
+  updateControlsSummaryLine();
 });
 
 themeButton.addEventListener("click", () => {
@@ -71,6 +106,7 @@ themeButton.addEventListener("click", () => {
   themeButton.textContent = isDark ? "Light Mode" : "Dark Mode";
 
   localStorage.setItem("fretboard-dark-mode", isDark);
+  updateControlsSummaryLine();
 });
 
 const savedTheme = localStorage.getItem("fretboard-dark-mode");
@@ -316,8 +352,20 @@ function renderTable() {
   tableContainer.appendChild(table);
 }
 
-[tuningSelect, orientationSelect].forEach((control) => {
-  control.addEventListener("change", renderTable);
+[modeSelect, intervalSelect].forEach((control) => {
+  control.addEventListener("change", () => {
+    updateControlsSummaryLine();
+    closeControlsDrawerIfNarrow();
+  });
 });
 
+[tuningSelect, orientationSelect].forEach((control) => {
+  control.addEventListener("change", () => {
+    updateControlsSummaryLine();
+    closeControlsDrawerIfNarrow();
+    renderTable();
+  });
+});
+
+updateControlsSummaryLine();
 renderTable();

@@ -10,7 +10,21 @@
 
     <h1>Interactive Guitar Fretboard Trainer</h1>
     
-    <div class="controls">
+    <div class="controls-shell">
+      <input
+        type="checkbox"
+        id="controls-drawer"
+        class="controls-drawer-input"
+        aria-controls="controls-panel"
+      />
+      <div class="controls-compact-bar">
+        <p id="controls-summary-line" class="controls-summary-line" aria-live="polite"></p>
+        <label for="controls-drawer" class="controls-drawer-label">
+          <span class="controls-drawer-label-text">Options</span>
+          <span class="controls-drawer-chevron" aria-hidden="true"></span>
+        </label>
+      </div>
+      <div id="controls-panel" class="controls">
     
       <div class="control-group">
         <label>Mode</label>
@@ -99,6 +113,7 @@
         <button id="toggle-theme">Dark Mode</button>
       </div>
     
+      </div>
     </div>
     
     <div class="table-wrapper">

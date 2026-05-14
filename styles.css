@@ -258,6 +258,15 @@ tbody th {
   z-index: 1;
 }
 
+tbody th[data-note] {
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+tbody th[data-note]:hover {
+  background: var(--hover-bg);
+}
+
 td:hover {
   background: var(--hover-bg);
 }
@@ -287,23 +296,23 @@ td:hover {
 }
 
 /* dark-mode badge text color + hover */
-body.dark td.root,
-body.dark td.scale,
-body.dark td.triad,
-body.dark td.seventh,
-body.dark td.interval,
-body.dark td.previous,
-body.dark td.next {
+body.dark tbody :is(td, th).root,
+body.dark tbody :is(td, th).scale,
+body.dark tbody :is(td, th).triad,
+body.dark tbody :is(td, th).seventh,
+body.dark tbody :is(td, th).interval,
+body.dark tbody :is(td, th).previous,
+body.dark tbody :is(td, th).next {
   color: var(--badge-dark-text);
 }
 
-body.dark td.root:hover,
-body.dark td.scale:hover,
-body.dark td.triad:hover,
-body.dark td.seventh:hover,
-body.dark td.interval:hover,
-body.dark td.previous:hover,
-body.dark td.next:hover {
+body.dark tbody :is(td, th).root:hover,
+body.dark tbody :is(td, th).scale:hover,
+body.dark tbody :is(td, th).triad:hover,
+body.dark tbody :is(td, th).seventh:hover,
+body.dark tbody :is(td, th).interval:hover,
+body.dark tbody :is(td, th).previous:hover,
+body.dark tbody :is(td, th).next:hover {
   color: var(--badge-dark-hover-text);
 }
 

@@ -32,6 +32,9 @@ const SCALES = {
   dominant7: [0, 4, 7, 10]
 };
 
+/** Fret cells and open-string headers (fret 0) — used for highlights and clearing. */
+const NOTE_CELLS = "tbody td[data-note], tbody th[data-note]";
+
 const CIRCLE_OF_FIFTHS = [
   "C",
   "G",
@@ -150,13 +153,55 @@ function generateChart() {
 }
 
 function clearHighlights() {
-  document.querySelectorAll("td").forEach((cell) => {
+  document.querySelectorAll(NOTE_CELLS).forEach((cell) => {
     cell.className = "";
   });
 }
 
+function handleNoteSelect(root) {
+  clearHighlights();
+
+  const mode = modeSelect.value;
+
+  playFrequency(root);
+
+  switch (mode) {
+    case "notes":
+      highlightMatching(root);
+      break;
+
+    case "fifths":
+      highlightCircle(root);
+      break;
+
+    case "major-scale":
+      highlightPattern(root, SCALES.major, "scale");
+      break;
+
+    case "minor-pentatonic":
+      highlightPattern(root, SCALES.pentatonicMinor, "scale");
+      break;
+
+    case "major-triad":
+      highlightPattern(root, SCALES.majorTriad, "triad");
+      break;
+
+    case "minor-triad":
+      highlightPattern(root, SCALES.minorTriad, "triad");
+      break;
+
+    case "dominant-7":
+      highlightPattern(root, SCALES.dominant7, "seventh");
+      break;
+
+    case "intervals":
+      highlightInterval(root, Number(intervalSelect.value));
+      break;
+  }
+}
+
 function highlightMatching(root) {
-  document.querySelectorAll("td").forEach((cell) => {
+  document.querySelectorAll(NOTE_CELLS).forEach((cell) => {
     if (cell.dataset.note === root) {
       cell.classList.add("root");
     }
@@ -175,7 +220,7 @@ function highlightCircle(root) {
 
   const next = CIRCLE_OF_FIFTHS[(index + 1) % CIRCLE_OF_FIFTHS.length];
 
-  document.querySelectorAll("td").forEach((cell) => {
+  document.querySelectorAll(NOTE_CELLS).forEach((cell) => {
     if (cell.dataset.note === root) {
       cell.classList.add("root");
     }
@@ -197,7 +242,7 @@ function highlightPattern(root, intervals, className) {
     return NOTES[(rootIndex + i) % NOTES.length];
   });
 
-  document.querySelectorAll("td").forEach((cell) => {
+  document.querySelectorAll(NOTE_CELLS).forEach((cell) => {
     if (cell.dataset.note === root) {
       cell.classList.add("root");
     }
@@ -212,7 +257,7 @@ function highlightInterval(root, interval) {
   const rootIndex = noteIndex(root);
   const target = NOTES[(rootIndex + interval) % NOTES.length];
 
-  document.querySelectorAll("td").forEach((cell) => {
+  document.querySelectorAll(NOTE_CELLS).forEach((cell) => {
     if (cell.dataset.note === root) {
       cell.classList.add("root");
     }
@@ -292,6 +337,8 @@ function renderTable() {
       if (index === 0) {
         const th = document.createElement("th");
         th.textContent = note;
+        th.dataset.note = note;
+        th.addEventListener("click", () => handleNoteSelect(note));
         tr.appendChild(th);
         return;
       }
@@ -300,48 +347,7 @@ function renderTable() {
       td.textContent = note;
       td.dataset.note = note;
 
-      td.addEventListener("click", () => {
-        clearHighlights();
-
-        const mode = modeSelect.value;
-        const root = note;
-
-        playFrequency(root);
-
-        switch (mode) {
-          case "notes":
-            highlightMatching(root);
-            break;
-
-          case "fifths":
-            highlightCircle(root);
-            break;
-
-          case "major-scale":
-            highlightPattern(root, SCALES.major, "scale");
-            break;
-
-          case "minor-pentatonic":
-            highlightPattern(root, SCALES.pentatonicMinor, "scale");
-            break;
-
-          case "major-triad":
-            highlightPattern(root, SCALES.majorTriad, "triad");
-            break;
-
-          case "minor-triad":
-            highlightPattern(root, SCALES.minorTriad, "triad");
-            break;
-
-          case "dominant-7":
-            highlightPattern(root, SCALES.dominant7, "seventh");
-            break;
-
-          case "intervals":
-            highlightInterval(root, Number(intervalSelect.value));
-            break;
-        }
-      });
+      td.addEventListener("click", () => handleNoteSelect(note));
 
       tr.appendChild(td);
     });

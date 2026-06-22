@@ -15,8 +15,7 @@ const TUNINGS = {
   // 6 string guitar
   standard: ["e", "B", "G", "D", "A", "E"],
   "drop-d": ["e", "B", "G", "D", "A", "D"],
-  "d-standard": ["d", "A#", "F", "C", "G", "D"],
-  "full-step-down": ["d", "A", "F", "C", "G", "D"],
+  "d-standard": ["d", "A", "F", "C", "G", "D"],
   "drop-c": ["d", "A", "F", "C", "G", "C"],
 
   // 7 string guitar

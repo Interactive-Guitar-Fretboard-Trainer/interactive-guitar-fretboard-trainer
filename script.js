@@ -5,6 +5,7 @@ const TUNINGS = {
   "bass-standard": ["G", "D", "A", "E"],
   "bass-drop-d": ["G", "D", "A", "D"],
   "bass-d-standard": ["F", "C", "G", "D"],
+  "bass-drop-x": ["F", "C", "G", "C"],
 
   // 5 string bass
   "bass-5-standard": ["G", "D", "A", "E", "B"],
@@ -16,7 +17,10 @@ const TUNINGS = {
   standard: ["e", "B", "G", "D", "A", "E"],
   "drop-d": ["e", "B", "G", "D", "A", "D"],
   "d-standard": ["d", "A", "F", "C", "G", "D"],
+  "drop-c#": ["d#", "A#", "F#", "C#", "G#", "C#"],
   "drop-c": ["d", "A", "F", "C", "G", "C"],
+  "b-standard": ["b", "F#", "D", "A", "E", "B"],
+  "drop-a": ["b", "F#", "D", "A", "E", "A"],
 
   // 7 string guitar
   "7-standard": ["e", "B", "G", "D", "A", "E", "B"],
